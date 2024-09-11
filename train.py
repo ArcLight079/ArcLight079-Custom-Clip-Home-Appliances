@@ -34,6 +34,7 @@ class image_title_dataset():
         title = self.title[idx]
         image = self.transform(image)
         return image, title
+# echo '' >> myimglist.txt
 #img2dataset --url_list=myimglist.txt --output_folder='data/Images' --thread_count=64 --image_size=256
 list_image_path=['data/Images/pic7.jpg','data/Images/pic8.jpg','data/Images/pic10.jpg','data/Images/pic11.jpg'] #pic 9 and 12 are for testing
 list_txt=['lofra','lofra','kelvinator','kelvinator'] #todo get labels first from output
