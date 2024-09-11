@@ -15,16 +15,14 @@ model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 
-#model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')
+#model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')#open clip model and toeknizer
 #tokenizer = open_clip.get_tokenizer('ViT-B-32')
 device = torch.device("cuda")
 model, preprocess = clip.load("ViT-B/32", device=device, jit=False)
 model.to(device)
 class image_title_dataset():
     def __init__(self, list_image_path,list_txt,transform):
-        # Initialize image paths and corresponding texts
         self.image_path = list_image_path
-        # Tokenize text using CLIP's tokenizer
         self.title  =  clip.tokenize(list_txt)
         self.transform=transform
 
@@ -32,7 +30,6 @@ class image_title_dataset():
         return len(self.title)
 
     def __getitem__(self, idx):
-        # Preprocess image using CLIP's preprocessing function
         image = preprocess(Image.open(self.image_path[idx]))
         title = self.title[idx]
         image = self.transform(image)

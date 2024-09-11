@@ -18,11 +18,11 @@ model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 
-#model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')
-#tokenizer = open_clip.get_tokenizer('ViT-B-32')
+#model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')#open clip model
+#tokenizer = open_clip.get_tokenizer('ViT-B-32')#open clip model
 device = torch.device("cuda")
 model, preprocess = clip.load("ViT-B/32", device=device, jit=False)
-model = torch.load('trained', weights_only=False)
+#model = torch.load('trained.pt', weights_only=False) #uncomment to get updated model
 model.eval()
 model.to(device)
 
@@ -38,4 +38,4 @@ with torch.no_grad(), torch.cuda.amp.autocast():
 
     text_probs = (100.0 * image_features @ text_features.T).softmax(dim=-1).cpu().numpy()
 
-print("Label probs:", text_probs)  # prints: [[1., 0., 0.]]
+print("Label probs:", text_probs)
