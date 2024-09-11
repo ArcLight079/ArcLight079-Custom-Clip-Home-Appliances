@@ -37,8 +37,9 @@ class image_title_dataset():
         title = self.title[idx]
         image = self.transform(image)
         return image, title
-list_image_path=['data/Images/pic7.jpg','data/Images/pic8.jpg']
-list_txt=['lofra','lofra']
+#img2dataset --url_list=myimglist.txt --output_folder='data/Images' --thread_count=64 --image_size=256
+list_image_path=['data/Images/pic7.jpg','data/Images/pic8.jpg','data/Images/pic10.jpg','data/Images/pic11.jpg'] #pic 9 and 12 are for testing
+list_txt=['lofra','lofra','kelvinator','kelvinator'] #todo get labels first from output
 
 
 transforms = v2.Compose([
@@ -87,4 +88,4 @@ for epoch in range(num_epochs):
             optimizer.step()
             clip.model.convert_weights(model)
         pbar.set_description(f"Epoch {epoch}/{num_epochs}, Loss: {total_loss.item():.4f}")
-torch.save(model, 'trained')
+torch.save(model, 'trained.pt')
